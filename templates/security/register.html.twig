@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+<div class="container fill">
+        <div class="row">
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        </div>
+        <div class="row">
+            <img src="img/downsize_200k_v1.jpeg">
+        </div>
+        {% if app.user %}   
+        {% else %}
+            <div class="row">
+                <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+            </div>
+            <div class="row">
+
+                <form method="post">
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Register
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

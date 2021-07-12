@@ -1,0 +1,20 @@
+2021-07-11 09:11:29,830 CRIT Supervisor running as root (no user in config file)
+2021-07-11 09:11:29,832 INFO supervisord started with pid 1
+2021-07-11 09:11:30,834 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:11:30,834 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:11:31,836 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:11:31,836 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:11:33,839 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:11:33,839 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:11:35,521 WARN received SIGINT indicating exit request
+2021-07-11 09:11:35,522 INFO waiting for nginx to die
+2021-07-11 09:12:19,868 CRIT Supervisor running as root (no user in config file)
+2021-07-11 09:12:19,870 INFO supervisord started with pid 1
+2021-07-11 09:12:20,871 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:12:20,872 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:12:21,874 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:12:21,874 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:12:23,876 INFO spawnerr: can't find command '/usr/sbin/nginx'
+2021-07-11 09:12:23,876 INFO spawnerr: can't find command '/usr/sbin/php7.4-fpm'
+2021-07-11 09:12:24,095 WARN received SIGINT indicating exit request
+2021-07-11 09:12:24,095 INFO waiting for nginx to die

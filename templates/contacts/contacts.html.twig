@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block body %}
+    <script>
+    $(document).ready(function(){
+        $('#rowsCount').change(function(){
+            var rowsCount = $('#rowsCount option:selected').text();
+            console.log({{page}});
+            window.location.href = '/user-tasks?page=1&rowsCount=' + rowsCount;            
+        });
+    });
+    </script>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <div class="container fill">
+
+        <h1 class="h3 mb-3 font-weight-normal">User: {{ username }} tasks</h1>
+
+        <div>
+
+            <div class="row" style="margin-top: 20px;">
+            <table>
+                <tr>
+                    <td><a href="/user-tasks?page=0&rowsCount={{rowsCount}}"><span style="color:blue"><b>Begin</b></span></a></td><td>;</td>
+
+                {% for pageNr, limit in paginationArr %}
+                    {% if page == pageNr %}
+                        <td><a href="/user-tasks?page={{pageNr}}&rowsCount={{rowsCount}}"><span style="color:red"><b>{{pageNr}}</b></span></a></td><td>;</td>
+                    {% endif %}
+                    {% if page != pageNr %}
+                        <td><a href="/user-tasks?page={{pageNr}}&rowsCount={{rowsCount}}">{{pageNr}}</a></td><td>;</td>
+                    {% endif %}
+                {% endfor %}
+
+                    <td><a href="/user-tasks?page={{pagesCount}}&rowsCount={{rowsCount}}"><span style="color:blue"><b>End</b></span></a></td><td>;</td>
+                </tr>
+            </table>
+
+            <select name="rowsCount" id="rowsCount">
+                <option value="5" {% if rowsCount == 5 %}{{'selected'}}{% endif %}>5</option>
+                <option value="10" {% if rowsCount == 10 %}{{'selected'}}{% endif %}>10</option>
+                <option value="20" {% if rowsCount == 20 %}{{'selected'}}{% endif %}>20</option>
+                <option value="100" {% if rowsCount == 100 %}{{'selected'}}{% endif %}>100</option>
+            </select>
+
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <table class="table" id="data-table">
+                <tr>
+                    <th>id</th>
+                    <th>startFrom</th>
+                    <th>endDateTime</th>
+                    <th>title</th>
+                    <th>dateTimeSpent</th>
+                    <th>Coments</th>
+                    <th>Complete</th>
+                </tr>
+                {% for row in tasksArrOb %}
+                    <tr>
+                        <td>{{row.id}}</td>  
+                        {% if row.date %}
+                            <td>{{row.date|date('Y-m-d H:i:s')}}</td>                  
+                        {% else %}
+                            <td>-</td> 
+                        {% endif %}
+                        <td>{{row.title}}</td>                  
+                        <td>{{row.phone}}</td>
+                        <td>{{row.comment}}</td>
+                        <td>{{row.address}}</td>
+                        <td>{{row.fullName}}</td>
+                        <td><a href="/contact-update?id={{row.id}}&page={{page}}&rowsCount={{rowsCount}}">Edit</a></td>
+                        <td><a href="/contact-delete-api?id={{row.id}}&page={{page}}&rowsCount={{rowsCount}}">Delete</a></td>
+    
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+                
+
+{% endblock %}

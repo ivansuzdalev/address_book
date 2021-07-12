@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login or register!{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="text-center">
+        <img src="img/downsize_200k_v1.jpeg">
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <main role="main" class="inner cover">
+                <h1 class="cover-heading">Please login or register</h1>
+                <p class="lead">
+                    {% if app.user %}
+                        <a href="{{ path('app_login') }}" class="btn btn-lg btn-secondary">{{ 'Logout' }}</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-lg btn-secondary">{{ 'Login' }}</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-lg btn-secondary">{{ 'Register' }}</a>
+                    {% endif %}
+                </p>
+            </main>
+        </div>
+    </div>
+
+{% endblock %}

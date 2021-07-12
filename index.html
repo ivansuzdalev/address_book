@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            affix();
+        });
+        var resizeId;
+        window.onresize = (e) => {
+            affix();
+            location.reload(true);
+        };
+        function affix() {
+            var w = window.innerWidth
+                || document.documentElement.clientWidth
+                || document.body.clientWidth;
+
+            var dataoffset = document.getElementsByTagName('body')[0];
+
+            if(w > 768) {
+                $('nav.navbar').affix({offset: {top: 72}});
+                dataoffset.setAttribute('data-offset', '90');
+            } else {
+                $('nav.navbar').affix({offset: {top: 0}});
+                dataoffset.setAttribute('data-offset', '0');
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="90">
+<nav class="navbar navbar-default navbar-white" >
+ in  555
+</body>
+<footer></footer>
+
+</html>
