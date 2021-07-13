@@ -8,7 +8,7 @@
         $('#rowsCount').change(function(){
             var rowsCount = $('#rowsCount option:selected').text();
             console.log({{page}});
-            window.location.href = '/user-tasks?page=1&rowsCount=' + rowsCount;            
+            window.location.href = '/contacts?page=1&rowsCount=' + rowsCount;            
         });
     });
     </script>
@@ -24,18 +24,18 @@
             <div class="row" style="margin-top: 20px;">
             <table>
                 <tr>
-                    <td><a href="/user-tasks?page=0&rowsCount={{rowsCount}}"><span style="color:blue"><b>Begin</b></span></a></td><td>;</td>
+                    <td><a href="/contacts?page=0&rowsCount={{rowsCount}}"><span style="color:blue"><b>Begin</b></span></a></td><td>;</td>
 
                 {% for pageNr, limit in paginationArr %}
                     {% if page == pageNr %}
-                        <td><a href="/user-tasks?page={{pageNr}}&rowsCount={{rowsCount}}"><span style="color:red"><b>{{pageNr}}</b></span></a></td><td>;</td>
+                        <td><a href="/contacts?page={{pageNr}}&rowsCount={{rowsCount}}"><span style="color:red"><b>{{pageNr}}</b></span></a></td><td>;</td>
                     {% endif %}
                     {% if page != pageNr %}
-                        <td><a href="/user-tasks?page={{pageNr}}&rowsCount={{rowsCount}}">{{pageNr}}</a></td><td>;</td>
+                        <td><a href="/contacts?page={{pageNr}}&rowsCount={{rowsCount}}">{{pageNr}}</a></td><td>;</td>
                     {% endif %}
                 {% endfor %}
 
-                    <td><a href="/user-tasks?page={{pagesCount}}&rowsCount={{rowsCount}}"><span style="color:blue"><b>End</b></span></a></td><td>;</td>
+                    <td><a href="/contacts?page={{pagesCount}}&rowsCount={{rowsCount}}"><span style="color:blue"><b>End</b></span></a></td><td>;</td>
                 </tr>
             </table>
 

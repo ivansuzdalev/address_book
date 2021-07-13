@@ -97,9 +97,30 @@ class ContactsController extends AbstractController
             return new RedirectResponse('/');
         } else {
             $error = '';
-            return $this->render('contacts/contact-create.html.twig', ['error' => $error, 'userName' => $userOb->getUserName()]); 
+            return $this->render('contacts/contact-create-update.html.twig', ['error' => $error, 'userName' => $userOb->getUserName()]); 
         }
     }
+
+    /**
+     * @Route("/contact-update", name="contact_update")
+     */
+    public function contactUpdate(Request $request, Security $security, Session $session)
+    {
+        $error = '';
+        $userOb = $security->getUser();
+        if(!$userOb) {
+            return new RedirectResponse('/');
+        } else {
+
+            $error = '';
+            $id = $request->get('id');
+            
+            $contactOb = $this->entityManager->getRepository(Contacts::class)->findOneBy(['id'=>$id]);
+    
+            return $this->render('contacts/contact-create-update.html.twig', ['contactOb' => $contactOb, 'error' => $error, 'userName' => $userOb->getUserName()]); 
+        }
+    }
+
 
     /**
      * @Route("/contact-create-update-api", name="contact_create_update_api")
@@ -111,8 +132,8 @@ class ContactsController extends AbstractController
         if($userOb) {
             
             $method = $request->getMethod(); 
-
-            if($method == 'POST' || $method == 'PUT') {
+            print_r($method);
+            if($method == 'POST') {
                 
                 
 
@@ -123,20 +144,12 @@ class ContactsController extends AbstractController
                 $fullName = $request->get('full_name');
                 $address = $request->get('address');
 
-                if($method == 'POST') {
+                if($id){
+                    $contactOb = $this->entityManager->getRepository(Contacts::class)->findOneBy(['id'=>$id]);
+                } else {
                     $contactOb = new Contacts();
                 }
-
-                if($method == 'PUT') {
-                    if($id){
-                        $contactOb = $this->entityManager->getRepository(Contacts::class)->findOneBy(['id'=>$id]);
-                    } else {
-                        $responceArray = array('success' => false, 'Record ID not found');
-                        $response = new Response(json_encode($responceArray), 404);  
-                        return $response;
-                    }
-                }
-
+        
 
                 $contactOb->setTitle($title);
                 $contactOb->setComment($comment);
@@ -198,8 +211,8 @@ class ContactsController extends AbstractController
 
               
             } else {
-                $responceArray = array('success' => false, 'error' => 'Support only DELETE request');
-                $response = new Response(json_encode($responceArray), 404);            
+                $responceArray = array('success' => false, 'error' => 'Support only GET request');
+                $response = new Response(json_encode($responceArray), 501);            
             }
             
         } else {
@@ -208,6 +221,42 @@ class ContactsController extends AbstractController
         }
         $response->headers->set('Content-Type', 'application/json');    
         return $response;
+    }
+
+    /**
+     * @Route("/contacts-share-api", name="contacts_export")
+     */
+    public function contactsShareApi(Request $request, Security $security, Session $session)
+    {
+        $error = '';
+        $userOb = $security->getUser();
+        if(!$userOb) {
+            return new RedirectResponse('/');
+        } else {
+
+            if($method == 'GET') {
+
+                $id = $request->get('id');
+                
+                $user_id = $request->get('user_id');
+
+                if($id && $user_id){
+                    $contactOb = $this->entityManager->getRepository(Contacts::class)->findOneBy(['id'=>$id]);
+                    $this->entityManager->remove($contactOb);
+                    $this->entityManager->flush();
+                    $responceArray = array('success' => true);
+                    $response = new Response(json_encode($responceArray), 200);    
+                } else {
+                    $responceArray = array('success' => false, 'record not found');
+                    $response = new Response(json_encode($responceArray), 404);    
+                }
+
+              
+            } else {
+                $responceArray = array('success' => false, 'error' => 'Support only GET request');
+                $response = new Response(json_encode($responceArray), 501);            
+            }
+        }
     }
 
     /**
