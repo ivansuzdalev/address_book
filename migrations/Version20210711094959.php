@@ -44,8 +44,8 @@ final class Version20210711094959 extends AbstractMigration
         $command = 'CREATE TABLE IF NOT EXISTS contacts_sharing (
             user_id integer not null,
             contact_id  integer not null,
-            foreign key (user_id) references user(id),
-            foreign key (contact_id) references contacts(id),
+            foreign key (user_id) references user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+            foreign key (contact_id) references contacts(id) ON UPDATE CASCADE ON DELETE CASCADE,
             primary key (user_id, contact_id)
         )';
         // execute the sql commands to create new tables

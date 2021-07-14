@@ -40,5 +40,16 @@ class ContactsSharing
         return $this->contactId;
     }
 
+    public function setUserId(int $userId): ?self
+    {
+        $this->userId = $userId;
+        return $this;
+    }
+
+    public function setContactId(int $contactId): ?self
+    {
+        $this->contactId = $contactId;
+        return $this;
+    }
 
 }

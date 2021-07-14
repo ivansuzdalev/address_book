@@ -17,7 +17,7 @@
     {% endif %}
     <div class="container fill">
 
-        <h1 class="h3 mb-3 font-weight-normal">User: {{ username }} tasks</h1>
+        <h1 class="h3 mb-3 font-weight-normal">User: {{ username }} contacts</h1>
 
         <div>
 
@@ -72,8 +72,8 @@
                         <td>{{row.address}}</td>
                         <td>{{row.fullName}}</td>
                         <td><a href="/contact-update?id={{row.id}}&page={{page}}&rowsCount={{rowsCount}}">Edit</a></td>
-                        <td><a href="/contact-delete-api?id={{row.id}}&page={{page}}&rowsCount={{rowsCount}}">Delete</a></td>
-    
+                        <td><a href="/contact-delete-api?contactId={{row.id}}&page={{page}}&rowsCount={{rowsCount}}">Delete</a></td>
+                        <td><a href="/contact-share?contact_id={{row.id}}">Share</a></td>
                     </tr>
                 {% endfor %}
             </table>

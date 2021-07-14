@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block body %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <div class="container fill">
+
+        <h1 class="h3 mb-3 font-weight-normal"> Share task </h1>
+
+        <div class="row" style="margin-top: 20px;">
+            <table class="table" id="data-table">
+                <tr>
+                    <th>id</th>
+                    <th>user name</th>
+                    <th>Is Shared</th>
+                    <th>Share</th>
+                </tr>
+                {% for row in contactSharedWithArr %}
+                    <tr>
+                        <td>{{row.userId}}</td>  
+                        <td>{{row.userFullName}}</td>
+                        <td>{{row.contactIsShared}}</td>
+                        {% if row.contactIsShared == false %}
+                            <td><a href="/contact-share-api?contact_id={{contactOb.id}}&user_id={{row.userId}}">Share</a></td>                  
+                        {% else %}
+                            <td><a href="/contact-unshare-api?contact_id={{contactOb.id}}&user_id={{row.userId}}">Unshare</a></td>                  
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+                
+
+{% endblock %}
